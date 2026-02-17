@@ -1,0 +1,37 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Subtelny RGB shift -->
+    <filter id="rgbShift">
+      <feOffset in="SourceGraphic" dx="-2" dy="0" result="red"/>
+      <feColorMatrix in="red" type="matrix"
+        values="1 0 0 0 0
+                0 0 0 0 0
+                0 0 0 0 0
+                0 0 0 1 0"/>
+      <feOffset in="SourceGraphic" dx="2" dy="0" result="cyan"/>
+      <feColorMatrix in="cyan" type="matrix"
+        values="0 0 0 0 0
+                0 0 1 0 0
+                0 0 1 0 0
+                0 0 0 1 0"/>
+      <feBlend in="red" in2="cyan" mode="screen"/>
+      <feBlend in="SourceGraphic" mode="lighten"/>
+    </filter>
+  </defs>
+
+  <!-- Tło -->
+  <rect width="512" height="512" fill="#0f0f0f"/>
+
+  <!-- MK -->
+  <text x="50%" y="54%"
+        text-anchor="middle"
+        dominant-baseline="middle"
+        font-family="Inter, Helvetica, Arial, sans-serif"
+        font-size="240"
+        font-weight="800"
+        letter-spacing="12"
+        fill="#ffffff"
+        filter="url(#rgbShift)">
+    MK
+  </text>
+</svg>
