@@ -91,7 +91,7 @@ export default function Home() {
         <div className="absolute inset-0 scanlines opacity-40" />
       </div>
 
-      <LoadingOverlay durationMs={0} onFinish={() => setIsLoading(false)} />
+      <LoadingOverlay durationMs={5000} onFinish={() => setIsLoading(false)} />
 
       <header className="relative z-20 border-b border-white/10 bg-black/60 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
@@ -127,20 +127,20 @@ export default function Home() {
             <p className="text-xs uppercase tracking-[0.4em] text-slate-400">
               Portfolio Interface
             </p>
-            <h1 className="glitch text-4xl font-semibold leading-tight sm:text-5xl">
+            <h1 className="glitch text-4xl font-semibold leading-tight sm:text-5xl" style={{ textShadow: '0 0 24px rgba(0, 0, 0, 1), 0 0 10px rgba(0, 0, 0, 0.8)'}}>
               Hi there, I'm Mark Kotarba
               <span className="block text-xl font-normal text-slate-300">
                 Creative Developer + Web Engineer
               </span>
             </h1>
-            <p className="max-w-xl text-base text-slate-300">
+            <p className="max-w-xl text-base text-slate-300" style={{ textShadow: '0 0 32px rgba(0, 0, 0, 1), 0 0 32px rgba(0, 0, 0, 1), 0 0 32px rgba(0, 0, 0, 1), 0 0 24px rgba(0, 0, 0, 1), 0 0 24px rgba(0, 0, 0, 1), 0 0 24px rgba(0, 0, 0, 1), 0 0 10px rgba(0, 0, 0, 0.8)'}}>
               A young programmer passionate about developing skills in creating modern and attractive websites. I eagerly learn new technologies and tools, continuously expanding my knowledge. I quickly resolve coding errors, effectively addressing encountered issues. My projects stand out for their aesthetics and functionality, capturing users' attention.
             </p>
             <div className="flex flex-wrap gap-4">
-              <a href="https://github.com/xnameTM" target="_blank" rel="noopener noreferrer" className="rounded-full border border-[color:var(--accent)] px-6 py-2 text-xs uppercase tracking-[0.3em] text-[color:var(--accent)] transition hover:bg-[color:var(--accent)] hover:text-black">
+              <a href="https://github.com/xnameTM" target="_blank" rel="noopener noreferrer" className="rounded-full border border-[color:var(--accent)] px-6 py-2 text-xs uppercase tracking-[0.3em] text-[color:var(--accent)] transition hover:bg-[color:var(--accent)] hover:text-black" style={{ textShadow: '0 0 24px rgba(0, 0, 0, 1), 0 0 24px rgba(0, 0, 0, 1), 0 0 24px rgba(0, 0, 0, 1), 0 0 24px rgba(0, 0, 0, 1), 0 0 24px rgba(0, 0, 0, 1), 0 0 24px rgba(0, 0, 0, 1), 0 0 10px rgba(0, 0, 0, 0.8)'}}>
                 GitHub
               </a>
-              <a href="https://www.linkedin.com/in/marek-kotarba-58b603239/" target="_blank" rel="noopener noreferrer" className="rounded-full border border-white/20 px-6 py-2 text-xs uppercase tracking-[0.3em] text-white/70 transition hover:border-white hover:text-white">
+              <a href="https://www.linkedin.com/in/marek-kotarba-58b603239/" target="_blank" rel="noopener noreferrer" className="rounded-full border border-white/20 px-6 py-2 text-xs uppercase tracking-[0.3em] text-white/70 transition hover:border-white hover:text-white" style={{ textShadow: '0 0 24px rgba(0, 0, 0, 1), 0 0 24px rgba(0, 0, 0, 1), 0 0 24px rgba(0, 0, 0, 1), 0 0 24px rgba(0, 0, 0, 1), 0 0 24px rgba(0, 0, 0, 1), 0 0 24px rgba(0, 0, 0, 1), 0 0 10px rgba(0, 0, 0, 0.8)'}}>
                 LinkedIn
               </a>
             </div>
@@ -183,10 +183,10 @@ export default function Home() {
 
         <section id="skills" data-section className="space-y-8">
           <div>
-            <p className="text-xs uppercase tracking-[0.4em] text-slate-400">
+            <p className="text-xs uppercase tracking-[0.4em] text-slate-400" style={{ textShadow: '2px 2px 8px rgba(0, 0, 0, 0.9)' }}>
               Capabilities
             </p>
-            <h2 className="mt-4 text-3xl font-semibold text-white">Skills</h2>
+            <h2 className="mt-4 text-3xl font-semibold text-white" style={{ textShadow: '2px 2px 8px rgba(0, 0, 0, 0.9)' }}>Skills</h2>
           </div>
           <div className="grid gap-6 lg:grid-cols-3">
             {skillsColumns.map(([group, items]) => (
@@ -212,10 +212,10 @@ export default function Home() {
 
         <section id="projects" data-section className="space-y-8">
           <div>
-            <p className="text-xs uppercase tracking-[0.4em] text-slate-400">
+            <p className="text-xs uppercase tracking-[0.4em] text-slate-400" style={{ textShadow: '2px 2px 8px rgba(0, 0, 0, 0.9)' }}>
               Field work
             </p>
-            <h2 className="mt-4 text-3xl font-semibold text-white">
+            <h2 className="mt-4 text-3xl font-semibold text-white" style={{ textShadow: '2px 2px 8px rgba(0, 0, 0, 0.9)' }}>
               Selected projects
             </h2>
           </div>

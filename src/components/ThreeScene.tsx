@@ -15,7 +15,6 @@ type PortraitData = {
 
 // Reduce points on mobile for better performance
 const MAX_POINTS = 18000;
-const LINE_COUNT = 4000;
 
 const randomBetween = (min: number, max: number) =>
   Math.random() * (max - min) + min;
@@ -138,8 +137,6 @@ export default function ThreeScene({ activeSection, isLoading }: ThreeSceneProps
   const lastScatterRef = useRef(0);
   const targetsRef = useRef<Float32Array[]>([]);
   const positionsRef = useRef<Float32Array>(new Float32Array(0));
-  const linePairsRef = useRef<number[]>([]);
-  const linePositionsRef = useRef<Float32Array>(new Float32Array(0));
   const currentTargetIndexRef = useRef(0);
   const targetChangedRef = useRef(false);
   const activeDataConnectionsRef = useRef<Array<{sourceIdx: number, targetIdx: number, age: number, lifetime: number}>>([]);
@@ -267,17 +264,6 @@ export default function ThreeScene({ activeSection, isLoading }: ThreeSceneProps
     cityGroup.receiveShadow = true;
     scene.add(cityGroup);
 
-    const lineGeometry = new THREE.BufferGeometry();
-    const lineMaterial = new THREE.LineBasicMaterial({
-      color: 0x67d6ff,
-      transparent: true,
-      opacity: 0.6,
-      linewidth: 1,
-      blending: THREE.AdditiveBlending,
-    });
-    const lines = new THREE.LineSegments(lineGeometry, lineMaterial);
-    scene.add(lines);
-
     const handleResize = () => {
       let width = container.clientWidth;
       let height = container.clientHeight;
@@ -387,24 +373,6 @@ export default function ThreeScene({ activeSection, isLoading }: ThreeSceneProps
         new THREE.BufferAttribute(colors, 3)
       );
       pointsGeometry.computeBoundingSphere();
-
-      const count = portrait.length / 3;
-      if (LINE_COUNT > 0) {
-        const linePairs: number[] = [];
-        for (let i = 0; i < LINE_COUNT; i += 1) {
-          linePairs.push(
-            Math.floor(Math.random() * count),
-            Math.floor(Math.random() * count)
-          );
-        }
-        linePairsRef.current = linePairs;
-
-        linePositionsRef.current = new Float32Array(LINE_COUNT * 2 * 3);
-        lineGeometry.setAttribute(
-          "position",
-          new THREE.BufferAttribute(linePositionsRef.current, 3)
-        );
-      }
     };
 
     const boot = async () => {
@@ -427,28 +395,6 @@ export default function ThreeScene({ activeSection, isLoading }: ThreeSceneProps
     boot();
 
     const clock = new THREE.Clock();
-    const updateLines = () => {
-      // @ts-ignore
-      if (LINE_COUNT === 0) return;
-      const positions = positionsRef.current;
-      const linePositions = linePositionsRef.current;
-      const linePairs = linePairsRef.current;
-
-      for (let i = 0; i < LINE_COUNT; i += 1) {
-        const a = linePairs[i * 2] * 3;
-        const b = linePairs[i * 2 + 1] * 3;
-        const offset = i * 6;
-        linePositions[offset] = positions[a] ?? 0;
-        linePositions[offset + 1] = positions[a + 1] ?? 0;
-        linePositions[offset + 2] = positions[a + 2] ?? 0;
-        linePositions[offset + 3] = positions[b] ?? 0;
-        linePositions[offset + 4] = positions[b + 1] ?? 0;
-        linePositions[offset + 5] = positions[b + 2] ?? 0;
-      }
-
-      const attribute = lineGeometry.getAttribute("position");
-      if (attribute) attribute.needsUpdate = true;
-    };
 
     const animate = () => {
       const time = clock.getElapsedTime();
@@ -540,12 +486,6 @@ export default function ThreeScene({ activeSection, isLoading }: ThreeSceneProps
       if (targetIndex !== 0) {
         targetChangedRef.current = true;
       }
-      
-      // Generate lines only for non-portrait shapes or once target has changed
-      if (targetChangedRef.current)
-        updateLines();
-
-      lineMaterial.opacity = 0;
 
       pointsMaterial.opacity = isLoadingRef.current ? 0.7 : 0.98;
 
@@ -567,9 +507,7 @@ export default function ThreeScene({ activeSection, isLoading }: ThreeSceneProps
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("pointermove", handlePointerMove);
       pointsGeometry.dispose();
-      lineGeometry.dispose();
       pointsMaterial.dispose();
-      lineMaterial.dispose();
       renderer.dispose();
 
       if (renderer.domElement.parentElement === container) {
