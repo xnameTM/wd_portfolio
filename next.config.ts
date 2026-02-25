@@ -5,6 +5,15 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
+  trailingSlash: true,
+  async rewrites() {
+    return [
+      {
+        source: "/bomberman/:path*",
+        destination: "/bomberman/:path*",
+      },
+    ]
+  },
 };
 
 export default nextConfig;
